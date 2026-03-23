@@ -3,9 +3,13 @@
 #                                                      :::      ::::::::    #
 #  __init__.py                                       :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
+#  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/23 13:58:40 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/23 13:58:47 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/23 18:53:52 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
+
+from ex1.SpellCard import SpellCard
+
+__all__ = ["SpellCard"]
