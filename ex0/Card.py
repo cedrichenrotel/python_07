@@ -5,10 +5,10 @@
 #                                                      :::      ::::::::    #
 #  Card.py                                           :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
+#  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/20 13:04:01 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/20 14:17:26 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/23 13:40:03 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -17,6 +17,10 @@ from abc import ABC, abstractmethod
 
 class Card(ABC):
     def __init__(self, name: str, cost: int, rarity: str) -> None:
+        if isinstance(cost, int) is False:
+            raise AttributeError(f"Class Card -> {cost}")
+        elif cost <= 0:
+            raise ValueError(f"Class Card -> {cost}")
         self.name = name
         self.cost = cost
         self.rarity = rarity
@@ -33,4 +37,6 @@ class Card(ABC):
             }
 
     def is_playable(self, available_mana: int) -> bool:
+        if isinstance(available_mana, int) is False or available_mana < 0:
+            raise ValueError("init mana cannot be a negative value")
         return available_mana >= self.cost
