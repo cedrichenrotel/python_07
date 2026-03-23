@@ -8,11 +8,10 @@
 #  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/20 13:12:47 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/23 13:44:42 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/23 14:09:00 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
-# from ex0.Card import Card
 from ex0.CreatureCard import CreatureCard
 
 
