@@ -8,20 +8,17 @@
 #  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/23 14:02:06 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/24 09:54:44 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/24 14:02:34 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
-# from ex0.Card import Card
 from ex0.CreatureCard import CreatureCard
 from ex1.SpellCard import SpellCard
 from ex1.ArtifactCard import ArtifactCard
+from ex1.Deck import Deck
 
 
 def main() -> None:
-
-    print("=== DataDeck Deck Builder ===")
-    print("\nBuilding deck with different card types...")
 
     try:
         lightning = SpellCard('Lightning Bol', 3, 'Common', 'Spell',
@@ -33,6 +30,19 @@ def main() -> None:
     except (AttributeError, ValueError) as e:
         print(f"SpellCard [KO]: {e}")
         return
+
+    deck = Deck()
+    # deck.add_card(lightning)
+    # deck.add_card(crystal)
+    # deck.add_card(dragon)
+    # deck.add_card(goblin)
+
+    print("=== DataDeck Deck Builder ===")
+    print("\nBuilding deck with different card types...")
+    print(f"Deck stats: {deck.get_deck_stats()}")
+    deck.shuffle()
+    card_draws = deck.draw_card()
+    print(f"draws a card: {card_draws.get_card_info()}")
 
     print("\nDrawing and playing cards:")
     print(f"\nDrew: {lightning.name} ({lightning.type})")

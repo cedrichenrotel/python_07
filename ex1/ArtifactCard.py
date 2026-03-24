@@ -8,7 +8,7 @@
 #  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/23 14:00:20 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/24 09:54:20 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/24 14:10:26 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -18,6 +18,12 @@ from ex0.Card import Card
 class ArtifactCard(Card):
     def __init__(self, name: str, cost: int, rarity: str, type: str,
                  durability: int, effect: str) -> None:
+
+        if isinstance(cost, int) is False:
+            raise AttributeError(f"Class ArtifactCard -> {durability}")
+        elif durability <= 0:
+            raise ValueError(f"Class ArtifactCard -> {durability}")
+
         super().__init__(name, cost, rarity, type)
         self.dura = durability
         self.effect = effect
