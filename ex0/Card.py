@@ -5,10 +5,10 @@
 #                                                      :::      ::::::::    #
 #  Card.py                                           :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
+#  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/20 13:04:01 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/23 13:40:03 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/24 09:16:01 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -16,7 +16,7 @@ from abc import ABC, abstractmethod
 
 
 class Card(ABC):
-    def __init__(self, name: str, cost: int, rarity: str) -> None:
+    def __init__(self, name: str, cost: int, rarity: str, type: str) -> None:
         if isinstance(cost, int) is False:
             raise AttributeError(f"Class Card -> {cost}")
         elif cost <= 0:
@@ -24,6 +24,7 @@ class Card(ABC):
         self.name = name
         self.cost = cost
         self.rarity = rarity
+        self.type = type
 
     @abstractmethod
     def play(self, game_state: dict) -> dict:

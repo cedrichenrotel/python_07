@@ -5,10 +5,10 @@
 #                                                      :::      ::::::::    #
 #  CreatureCard.py                                   :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
+#  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/20 13:12:10 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/23 13:26:32 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/24 09:17:13 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -29,8 +29,7 @@ class CreatureCard(Card):
         elif health <= 0:
             raise ValueError(f"Class CreatureCard -> {health}")
 
-        super().__init__(name, cost, rarity)
-        self.type = type
+        super().__init__(name, cost, rarity, type)
         self.attack = attack
         self.health = health
 
