@@ -8,7 +8,7 @@
 #  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/20 13:12:10 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/24 09:17:13 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/24 14:33:45 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -19,14 +19,10 @@ class CreatureCard(Card):
     def __init__(self, name: str, cost: int, rarity: str, type: str,
                  attack: int, health: int) -> None:
 
-        if isinstance(attack, int) is False:
-            raise AttributeError(f"Class CreatureCard -> {attack}")
-        elif attack <= 0:
+        if not isinstance(attack, int) or attack <= 0:
             raise ValueError(f"Class CreatureCard -> {attack}")
 
-        if isinstance(health, int) is False:
-            raise AttributeError(f"Class CreatureCard -> {health}")
-        elif health <= 0:
+        if not isinstance(health, int) or health <= 0:
             raise ValueError(f"Class CreatureCard -> {health}")
 
         super().__init__(name, cost, rarity, type)

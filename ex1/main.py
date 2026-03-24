@@ -8,7 +8,7 @@
 #  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/23 14:02:06 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/24 14:02:34 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/24 15:27:35 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -28,21 +28,25 @@ def main() -> None:
         dragon = CreatureCard('Fire Dragon', 5, 'Legendary', 'Creature', 7, 5)
         goblin = CreatureCard('Goblin Warrior', 7, 'Common', 'Creature', 3, 3)
     except (AttributeError, ValueError) as e:
-        print(f"SpellCard [KO]: {e}")
+        print(f"ERROR: initialisation card [KO]: {e}")
         return
 
-    deck = Deck()
-    # deck.add_card(lightning)
-    # deck.add_card(crystal)
-    # deck.add_card(dragon)
-    # deck.add_card(goblin)
+    try:
+        deck = Deck()
+        deck.add_card(lightning)
+        deck.add_card(crystal)
+        deck.add_card(dragon)
+        deck.add_card(goblin)
 
-    print("=== DataDeck Deck Builder ===")
-    print("\nBuilding deck with different card types...")
-    print(f"Deck stats: {deck.get_deck_stats()}")
-    deck.shuffle()
-    card_draws = deck.draw_card()
-    print(f"draws a card: {card_draws.get_card_info()}")
+        print("=== DataDeck Deck Builder ===")
+        print("\nBuilding deck with different card types...")
+        print(f"Deck stats: {deck.get_deck_stats()}")
+        deck.shuffle()
+        card_draws = deck.draw_card()
+        print(f"draws a card: {card_draws.get_card_info()}")
+    except (ValueError, AttributeError, ZeroDivisionError) as e:
+        print(f"ERROR: deck.py [KO]: {e}")
+        return
 
     print("\nDrawing and playing cards:")
     print(f"\nDrew: {lightning.name} ({lightning.type})")

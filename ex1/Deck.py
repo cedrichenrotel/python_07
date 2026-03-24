@@ -8,7 +8,7 @@
 #  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/23 14:00:55 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/24 13:47:04 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/24 15:24:36 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -37,11 +37,16 @@ class Deck():
         random.shuffle(self.lst_deck)
 
     def draw_card(self) -> Card:
+        if len(self.lst_deck) <= 0:
+            raise ValueError(f"draw_card -> {len(self.lst_deck)}")
         return self.lst_deck.pop(0)
 
     def get_deck_stats(self) -> dict:
         card_total = len(self.lst_deck)
         creature, spell, artifact, total_cost = 0, 0, 0, 0
+
+        if card_total == 0:
+            raise ZeroDivisionError("get_deck_stats: total_cost <= 0")
 
         for item in self.lst_deck:
             if isinstance(item, CreatureCard):
@@ -51,7 +56,7 @@ class Deck():
             elif isinstance(item, ArtifactCard):
                 artifact += 1
             total_cost += item.cost
-            avg_cost = float(total_cost / card_total)
+        avg_cost = float(total_cost / card_total)
 
         deck_stats = {
             'total_cards': card_total,

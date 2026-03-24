@@ -8,7 +8,7 @@
 #  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/20 13:04:01 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/24 09:16:01 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/24 14:36:41 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -17,10 +17,11 @@ from abc import ABC, abstractmethod
 
 class Card(ABC):
     def __init__(self, name: str, cost: int, rarity: str, type: str) -> None:
-        if isinstance(cost, int) is False:
-            raise AttributeError(f"Class Card -> {cost}")
-        elif cost <= 0:
-            raise ValueError(f"Class Card -> {cost}")
+        if not isinstance(name, str) or name == "":
+            raise ValueError(f"Class Card -> name: {name}")
+        elif not isinstance(cost, int) or cost <= 0:
+            raise ValueError(f"Class Card -> cost: {cost}")
+
         self.name = name
         self.cost = cost
         self.rarity = rarity
