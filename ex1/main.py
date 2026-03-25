@@ -8,7 +8,7 @@
 #  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/23 14:02:06 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/24 15:27:35 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/25 17:38:13 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -28,7 +28,7 @@ def main() -> None:
         dragon = CreatureCard('Fire Dragon', 5, 'Legendary', 'Creature', 7, 5)
         goblin = CreatureCard('Goblin Warrior', 7, 'Common', 'Creature', 3, 3)
     except (AttributeError, ValueError) as e:
-        print(f"ERROR: initialisation card [KO]: {e}")
+        print(f"Ex1: [ERROR]-> initialisation card [KO]: {e}")
         return
 
     try:
