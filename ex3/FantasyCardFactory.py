@@ -6,7 +6,7 @@
 #  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/25 14:53:45 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/26 15:16:08 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/26 15:59:35 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -117,7 +117,7 @@ class FantasyCardFactory(CardFactory):
                     "Permanent: +2 attack to equipped creature",
                     "Permanent: Draw an extra card each turn",
                     "Permanent: +3 health to all friendly creatures",
-                    "Permanent: +1 cost reduction to all cards"
+                    "Permanent: +1 cost reduction to all cards",
                     "Permanent: Cards cost 1 less mana",
                     "Permanent: Creatures have stealth",
                     "Permanent: +1 spell damage"])
@@ -141,7 +141,7 @@ class FantasyCardFactory(CardFactory):
                     "Permanent: +2 attack to equipped creature",
                     "Permanent: Draw an extra card each turn",
                     "Permanent: +3 health to all friendly creatures",
-                    "Permanent: +1 cost reduction to all cards"
+                    "Permanent: +1 cost reduction to all cards",
                     "Permanent: Cards cost 1 less mana",
                     "Permanent: Creatures have stealth",
                     "Permanent: +1 spell damage"])
@@ -165,7 +165,7 @@ class FantasyCardFactory(CardFactory):
                     "Permanent: +2 attack to equipped creature",
                     "Permanent: Draw an extra card each turn",
                     "Permanent: +3 health to all friendly creatures",
-                    "Permanent: +1 cost reduction to all cards"
+                    "Permanent: +1 cost reduction to all cards",
                     "Permanent: Cards cost 1 less mana",
                     "Permanent: Creatures have stealth",
                     "Permanent: +1 spell damage"])
@@ -180,11 +180,13 @@ class FantasyCardFactory(CardFactory):
         pack_s = [self.create_spell() for _ in range(base)]
         for _ in range(reste):
             lst_choice = (choice([pack_c, pack_a, pack_s]))
-            lst_choice.append(choice([
-                self.create_creature(),
-                self.create_artifact(),
-                self.create_spell()
-            ]))
+            if lst_choice is pack_c:
+                lst_choice.append(self.create_creature())
+            elif lst_choice is pack_a:
+                lst_choice.append(self.create_artifact())
+            else:
+                lst_choice.append(self.create_spell())
+
         result = {
             'Creature cards': pack_c,
             'Spell cards': pack_s,
