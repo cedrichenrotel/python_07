@@ -3,27 +3,41 @@
 #                                                      :::      ::::::::    #
 #  main.py                                           :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
+#  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/25 14:54:34 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/25 17:43:59 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/26 15:23:37 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
-from ex0.CreatureCard import CreatureCard
-from ex1.SpellCard import SpellCard
+# from ex0.CreatureCard import CreatureCard
+# from ex1.ArtifactCard import ArtifactCard
 from ex3.AggressiveStrategy import AggressiveStrategy
+from ex3.FantasyCardFactory import FantasyCardFactory
 
 
-try:
-    goblin = CreatureCard('Goblin Warrior', 2, 'Common', 'Creature', 3, 3)
-    dragon = CreatureCard('Fire Dragon', 5, 'Legendary', 'Creature', 7, 5)
-    lightning = SpellCard('Lightning Bolt', 3, 'rarity', 'Spell',
-                          'Deal 3 damage to target')
-except ValueError as e:
-    print(f"Ex3: [ERROR]-> initialisation card [KO]: {e}")
+strategy = AggressiveStrategy()
+fantasy = FantasyCardFactory()
+
+lst_player = [
+    fantasy.create_spell('fire'),
+    fantasy.create_spell(1),
+    fantasy.create_spell()
+]
+
+lst_enemy = [
+    fantasy.create_creature(),
+    fantasy.create_creature(),
+    fantasy.create_creature()
+]
 
 print("=== DataDeck Game Engine ===")
-print("\nTurn execution:")
-print(f"")
-print(f"Strategy: {AggressiveStrategy.get_strategy_name}:")
+# print("\nTurn execution:")
+# print(f"Strategy: {strategy.get_strategy_name()}:")
+# print(f"Action: {strategy.execute_turn(lst_player, lst_enemy)}")
+packet = fantasy.create_themed_deck(10)
+
+for key, cards in packet.items():
+    print(f"\n{key}:")
+    for card in cards:
+        print(card.get_card_info())

@@ -3,18 +3,13 @@
 #                                                      :::      ::::::::    #
 #  AggressiveStrategy.py                             :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
+#  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/25 14:53:22 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/25 19:05:21 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/26 09:35:36 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
-from ex0.Card import Card
-from ex0.CreatureCard import CreatureCard
-from ex1.SpellCard import SpellCard
-from ex2.Combatable import Combatable
-from ex2.Magical import Magical
 from ex3.GameStrategy import GameStrategy
 
 
@@ -22,6 +17,7 @@ class AggressiveStrategy(GameStrategy):
     def execute_turn(self, hand: list, battlefield: list) -> dict:
         total_cost = 9
         cost_used = 0
+        damage_dealt = 0
         card = []
         hand_sorted = sorted(hand, key=lambda x: x.cost)
         for item in hand_sorted:
@@ -29,17 +25,19 @@ class AggressiveStrategy(GameStrategy):
                 card.append(item)
                 total_cost -= item.cost
                 cost_used += item.cost
-
+                if hasattr(item, 'attack'):
+                    damage_dealt += item.attack
 
         result = {
-            'cards_played': card.name,
+            'cards_played': [x.name for x in card],
             'mana_used': cost_used,
-            'targets_attacked':
+            'targets_attacked': [x.name for x in battlefield],
+            'damage_dealt': damage_dealt
         }
         return result
 
     def get_strategy_name(self) -> str:
         return 'AggressiveStrategy'
-    
+
     def prioritize_targets(self, available_targets: list) -> list:
         return available_targets
