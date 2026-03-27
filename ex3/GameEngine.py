@@ -6,7 +6,7 @@
 #  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/25 14:54:07 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/27 11:35:47 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/27 13:04:42 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -26,14 +26,18 @@ class GameEngine():
     def simulate_turn(self, pioche: dict) -> dict:
         if not isinstance(pioche, dict):
             raise AttributeError("simulate_turn: pioche is not dict")
-        main = pioche
-        battlefield = pioche['Creature cards']
+        lst_pioche = (
+            pioche['Creature cards'] +
+            pioche['Spell cards'] +
+            pioche['Artifact cards']
+        )
+        half = len(lst_pioche) // 2
+        main = lst_pioche[half:]
+        battlefield = lst_pioche[:half]
 
-        self.len_card_creature = (len(pioche['Creature cards']) +
-                                  len(pioche['Spell cards']) +
-                                  len(pioche['Artifact cards']))
+        self.len_card_creature = len(lst_pioche)
         self.turn += 1
-        result = self.strategy.execute_turn(main['Creature cards'],
+        result = self.strategy.execute_turn(main,
                                             battlefield)
         self.total_dommage = result['damage_dealt']
         return result
