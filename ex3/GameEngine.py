@@ -3,10 +3,10 @@
 #                                                      :::      ::::::::    #
 #  GameEngine.py                                     :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
+#  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/25 14:54:07 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/26 17:03:24 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/27 11:35:47 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -19,12 +19,30 @@ class GameEngine():
                          strategy: GameStrategy) -> None:
         self.factory = factory
         self.strategy = strategy
+        self.turn = 0
+        self.len_card_creature = 0
+        self.total_dommage = 0
 
-    def simulate_turn(self) -> dict:
-        main = self.factory.create_themed_deck(5)
-        battlefield = self.factory.create_creature()
-        return self.strategy.execute_turn(main['Creature cards'],
-                                          [battlefield])
+    def simulate_turn(self, pioche: dict) -> dict:
+        if not isinstance(pioche, dict):
+            raise AttributeError("simulate_turn: pioche is not dict")
+        main = pioche
+        battlefield = pioche['Creature cards']
+
+        self.len_card_creature = (len(pioche['Creature cards']) +
+                                  len(pioche['Spell cards']) +
+                                  len(pioche['Artifact cards']))
+        self.turn += 1
+        result = self.strategy.execute_turn(main['Creature cards'],
+                                            battlefield)
+        self.total_dommage = result['damage_dealt']
+        return result
 
     def get_engine_status(self) -> dict:
-        pass
+        result = {
+            'turns_simulated': self.turn,
+            'strategy_used': self.strategy.get_strategy_name(),
+            'total_damage': self.total_dommage,
+            'cards_created': self.len_card_creature
+        }
+        return result

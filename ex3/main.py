@@ -3,10 +3,10 @@
 #                                                      :::      ::::::::    #
 #  main.py                                           :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
+#  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/25 14:54:34 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/26 17:09:21 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/27 11:19:14 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -16,24 +16,23 @@ from ex3.FantasyCardFactory import FantasyCardFactory
 
 
 strategy = AggressiveStrategy()
-fantasy = FantasyCardFactory()
+factory = FantasyCardFactory()
 engine = GameEngine()
+engine.configure_engine(factory, strategy)
+try:
 
-lst_player = [
-    fantasy.create_spell('fire'),
-    fantasy.create_spell(1),
-    fantasy.create_spell()
-]
+    pioche = factory.create_themed_deck(10)
 
-lst_enemy = [
-    fantasy.create_creature(),
-    fantasy.create_creature(),
-    fantasy.create_creature()
-]
+    print("=== DataDeck Game Engine ===")
 
-print("=== DataDeck Game Engine ===")
-# print("\nTurn execution:")
-# print(f"Strategy: {strategy.get_strategy_name()}:")
-# print(f"Action: {strategy.execute_turn(lst_player, lst_enemy)}")
-engine.configure_engine(fantasy, strategy)
-print(f"tour enemy: {engine.simulate_turn()}")
+    print("\nConfiguring Fantasy Card Game...")
+    print(f"Factory: {factory.__class__.__name__}")
+    print(f"Strategy: {strategy.__class__.__name__}")
+    print(f"Available types:\n {factory.get_supported_types(pioche)}")
+    print(f"\nTurn execution:\n{engine.simulate_turn(pioche)}")
+    print(f"\nGame Report:\n{engine.get_engine_status()}")
+    print("\nAbstract Factory + Strategy Pattern: Maximum flexibility "
+          "achieved!")
+
+except (ValueError, AttributeError) as e:
+    print(f"[KO] error: {e}")

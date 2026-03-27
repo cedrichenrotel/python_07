@@ -3,10 +3,10 @@
 #                                                      :::      ::::::::    #
 #  FantasyCardFactory.py                             :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
+#  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/25 14:53:45 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/26 15:59:35 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/27 11:09:58 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -172,6 +172,10 @@ class FantasyCardFactory(CardFactory):
                 )
 
     def create_themed_deck(self, size: int) -> dict:
+        if not isinstance(size, int) or size < 2:
+            raise ValueError(f"create_themed_deck: number cards < 2 -> size: "
+                             f"{size}")
+
         base = size // 3
         reste = size % 3
 
@@ -194,9 +198,10 @@ class FantasyCardFactory(CardFactory):
         }
         return result
 
-    def get_supported_types(self) -> dict:
-        return {
-            'creatures': ['goblin', 'dragon', 'golem', 'assassin'],
-            'spells': ['lightning'],
-            'artifacts': ['crystal']
+    def get_supported_types(self, pioche: dict) -> dict:
+        result = {
+            'creatures': [c.name for c in pioche['Creature cards']],
+            'spells': [c.name for c in pioche['Spell cards']],
+            'artifacts': [c.name for c in pioche['Artifact cards']]
         }
+        return result
