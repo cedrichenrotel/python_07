@@ -6,7 +6,7 @@
 #  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/24 16:43:05 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/25 11:56:17 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/27 17:14:17 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -17,29 +17,26 @@ from ex2.Magical import Magical
 
 class EliteCard(Card, Combatable, Magical):
     def __init__(self, name: str, cost: int, rarity: str, type: str,
-                 health: int, power: int, defense: int, mana: int) -> None:
+                 health: int, power: int, mana: int) -> None:
 
         if not isinstance(power, int) or power <= 0:
             raise ValueError(f"EliteCard -> power: {power}")
         elif not isinstance(health, int) or health <= 0:
             raise ValueError(f"EliteCard -> defense: {health}")
-        elif not isinstance(defense, int) or defense <= 0:
-            raise ValueError(f"EliteCard -> defense: {defense}")
         elif not isinstance(mana, int) or mana <= 0:
             raise ValueError(f"EliteCard -> mana: {mana}")
 
         super().__init__(name, cost, rarity, type)
         self.health = health
         self.power = power
-        self.defense = defense
         self.mana = mana
 
     def get_combat_stats(self) -> dict:
         result = {
+            'card_player': self.name,
             'health': self.health,
             'power': self.power,
-            'defense': self.defense,
-            'mana': self.mana
+            'mana': self.cost
         }
         return result
 
@@ -53,23 +50,13 @@ class EliteCard(Card, Combatable, Magical):
         return result
 
     def defend(self, incoming_damage: int) -> dict:
-        if self.defense >= incoming_damage:
-            damage_taken = 0
-        else:
-            damage_taken = incoming_damage - self.defense
-
-        if self.health - damage_taken > 0:
-            still_alive = True
-        else:
-            still_alive = False
-
-        damage_blocked = min(self.defense, incoming_damage)
+        damage_blocked = min(self.health, incoming_damage)
 
         result = {
             'defender': self.name,
             'damage_blocked': damage_blocked,
-            'damage_taken': damage_taken,
-            'still_alive': still_alive
+            'damage_taken': incoming_damage,
+            'still_alive': self.health > incoming_damage
         }
         return result
 
@@ -126,7 +113,7 @@ class EliteCard(Card, Combatable, Magical):
         info_elite = {
             'health': self.health,
             'power': self.power,
-            'defense': self.defense,
+            'defense': self.health,
             'mana': self.mana
         }
         return {**info_base, **info_elite}

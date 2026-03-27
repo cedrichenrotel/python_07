@@ -6,7 +6,7 @@
 #  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/27 13:54:29 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/27 15:23:56 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/27 17:40:53 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -34,7 +34,6 @@ class TournamentCard(Card, Combatable, Rankable):
         self.rating = 1200
 
     def play(self, game_state: dict) -> dict:
-        game_state = {'available_mana': 6}
         if self.cost <= game_state['available_mana']:
             result = {
                 'Card_player': self.name,
@@ -63,26 +62,58 @@ class TournamentCard(Card, Combatable, Rankable):
             raise ValueError("init mana cannot be a negative value")
         return available_mana >= self.cost
 
-    def attack(self, target) -> dict:
-        pass
+    def attack(self, target: dict) -> dict:
+        result = {
+            'attacker': self.name,
+            'target': target['name'],
+            'damage_dealt': self.power,
+            'combat_resolved': True
+        }
+        return result
 
     def defend(self, incoming_damage: int) -> dict:
-        pass
+        damage_blocked = min(self.health, incoming_damage)
+
+        result = {
+            'defender': self.name,
+            'damage_taken': incoming_damage,
+            'damage_blocked': damage_blocked,
+            'still_alive': self.health > incoming_damage
+        }
+        return result
 
     def get_combat_stats(self) -> dict:
-        pass
+        result = {
+            'card_player': self.name,
+            'health': self.health,
+            'power': self.power,
+            'mana': self.cost
+        }
+        return result
 
     def calculate_rating(self) -> int:
-        pass
+        self.rating = 1200 + (self.wins * 16) - (self.losses * 16)
+        return self.rating
 
     def get_tournament_stats(self) -> dict:
-        pass
+        result = {
+            'name': self.name,
+            'wins': self.wins,
+            'losses': self.losses,
+            'rating': self.rating
+        }
+        return result
 
     def update_wins(self, wins: int) -> None:
-        pass
+        self.wins += wins
 
     def update_losses(self, losses: int) -> None:
-        pass
+        self.losses += losses
 
     def get_rank_info(self) -> dict:
-        pass
+        result = {
+            'wins': self.wins,
+            'losses': self.losses,
+            'rating': self.rating
+        }
+        return result
