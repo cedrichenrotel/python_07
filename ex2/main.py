@@ -6,7 +6,7 @@
 #  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/24 16:46:43 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/25 14:33:57 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/30 19:35:15 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -20,8 +20,8 @@ from ex2.EliteCard import EliteCard
 
 def main() -> None:
     try:
-        player1 = EliteCard('Arcane Warrior', 1, "common", "adventurer",
-                            7, 5, 3, 10)
+        player1 = EliteCard('Arcane Warrior', 1, "common", "adventurer", 5, 3,
+                            10)
         goblin = CreatureCard('Goblin Warrior', 7, 'Common', 'Creature', 3, 3)
         dragon = CreatureCard('Fire Dragon', 5, 'Legendary', 'Creature', 7, 5)
         fire_ball = SpellCard('Fire Ball', 3, 'Common', 'Spell',

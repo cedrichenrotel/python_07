@@ -6,7 +6,7 @@
 #  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/25 14:53:45 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/27 11:09:58 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/30 19:47:06 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -198,10 +198,13 @@ class FantasyCardFactory(CardFactory):
         }
         return result
 
-    def get_supported_types(self, pioche: dict) -> dict:
+    def get_supported_types(self) -> dict:
         result = {
-            'creatures': [c.name for c in pioche['Creature cards']],
-            'spells': [c.name for c in pioche['Spell cards']],
-            'artifacts': [c.name for c in pioche['Artifact cards']]
+            'creatures': [c.name for c in
+                          self.create_themed_deck(9)['Creature cards']],
+            'spells': [c.name for c in
+                       self.create_themed_deck(9)['Spell cards']],
+            'artifacts': [c.name for c in
+                          self.create_themed_deck(9)['Artifact cards']]
         }
         return result

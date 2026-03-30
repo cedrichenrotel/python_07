@@ -8,7 +8,7 @@
 #  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/23 14:00:55 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/24 15:24:36 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/30 19:29:18 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -21,7 +21,7 @@ from ex1.ArtifactCard import ArtifactCard
 
 class Deck():
     def __init__(self) -> None:
-        self.lst_deck = []
+        self.lst_deck: list[Card] = []
 
     def add_card(self, card: Card) -> None:
         self.lst_deck.append(card)

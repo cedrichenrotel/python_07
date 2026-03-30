@@ -6,7 +6,7 @@
 #  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/25 14:54:34 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/27 11:19:14 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/30 19:48:02 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -21,15 +21,13 @@ engine = GameEngine()
 engine.configure_engine(factory, strategy)
 try:
 
-    pioche = factory.create_themed_deck(10)
-
     print("=== DataDeck Game Engine ===")
 
     print("\nConfiguring Fantasy Card Game...")
     print(f"Factory: {factory.__class__.__name__}")
     print(f"Strategy: {strategy.__class__.__name__}")
-    print(f"Available types:\n {factory.get_supported_types(pioche)}")
-    print(f"\nTurn execution:\n{engine.simulate_turn(pioche)}")
+    print(f"Available types:\n {factory.get_supported_types()}")
+    print(f"\nTurn execution:\n{engine.simulate_turn()}")
     print(f"\nGame Report:\n{engine.get_engine_status()}")
     print("\nAbstract Factory + Strategy Pattern: Maximum flexibility "
           "achieved!")

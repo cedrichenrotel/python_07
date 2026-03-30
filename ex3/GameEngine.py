@@ -6,7 +6,7 @@
 #  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/25 14:54:07 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/27 13:04:42 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/30 19:52:22 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -23,9 +23,8 @@ class GameEngine():
         self.len_card_creature = 0
         self.total_dommage = 0
 
-    def simulate_turn(self, pioche: dict) -> dict:
-        if not isinstance(pioche, dict):
-            raise AttributeError("simulate_turn: pioche is not dict")
+    def simulate_turn(self) -> dict:
+        pioche = self.factory.create_themed_deck(9)
         lst_pioche = (
             pioche['Creature cards'] +
             pioche['Spell cards'] +

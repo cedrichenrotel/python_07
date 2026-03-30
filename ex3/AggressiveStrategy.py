@@ -6,7 +6,7 @@
 #  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/25 14:53:22 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/27 09:30:58 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/30 19:54:11 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -37,7 +37,7 @@ class AggressiveStrategy(GameStrategy):
         return result
 
     def get_strategy_name(self) -> str:
-        return __class__.__name__
+        return self.__class__.__name__
 
     def prioritize_targets(self, available_targets: list) -> list:
         return available_targets
