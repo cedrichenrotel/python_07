@@ -6,7 +6,7 @@
 #  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/25 14:53:45 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/31 11:49:30 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/31 13:21:07 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -218,12 +218,10 @@ class FantasyCardFactory(CardFactory):
         return result
 
     def get_supported_types(self) -> dict:
+        deck = self.create_themed_deck(9)
         result = {
-            'creatures': [c.name for c in
-                          self.create_themed_deck(9)['Creature cards']],
-            'spells': [c.name for c in
-                       self.create_themed_deck(9)['Spell cards']],
-            'artifacts': [c.name for c in
-                          self.create_themed_deck(9)['Artifact cards']]
+            'creatures': [c.name for c in deck['Creature cards']],
+            'spells': [c.name for c in deck['Spell cards']],
+            'artifacts': [c.name for c in deck['Artifact cards']]
         }
         return result
