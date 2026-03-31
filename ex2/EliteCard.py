@@ -3,20 +3,21 @@
 #                                                      :::      ::::::::    #
 #  EliteCard.py                                      :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
+#  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/24 16:43:05 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/27 17:14:17 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/31 11:36:23 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
 from ex0.Card import Card
+from ex0.Card import Rarity
 from ex2.Combatable import Combatable
 from ex2.Magical import Magical
 
 
 class EliteCard(Card, Combatable, Magical):
-    def __init__(self, name: str, cost: int, rarity: str, type: str,
+    def __init__(self, name: str, cost: int, rarity: Rarity, type: str,
                  health: int, power: int, mana: int) -> None:
 
         if not isinstance(power, int) or power <= 0:
@@ -40,7 +41,9 @@ class EliteCard(Card, Combatable, Magical):
         }
         return result
 
-    def attack(self, target) -> dict:
+    def attack(self, target: str) -> dict:
+        if not isinstance(target, str):
+            raise TypeError(f"attack: target: {target} is not Card")
         result = {
             'attacker': self.name,
             'target': target,
@@ -50,6 +53,9 @@ class EliteCard(Card, Combatable, Magical):
         return result
 
     def defend(self, incoming_damage: int) -> dict:
+        if not isinstance(incoming_damage, int):
+            raise TypeError(f"defend: incoming_damage is not int -> "
+                            f"{incoming_damage}")
         damage_blocked = min(self.health, incoming_damage)
 
         result = {
@@ -79,6 +85,11 @@ class EliteCard(Card, Combatable, Magical):
         return result
 
     def cast_spell(self, spell_name: str, targets: list) -> dict:
+        if not isinstance(spell_name, str) or spell_name == "":
+            raise TypeError(f"cast_spell: {spell_name}")
+        if not isinstance(targets, list) or targets == []:
+            raise TypeError(f"cast_spell: {targets}")
+
         mana_used = 4
         if self.mana - mana_used < 0:
             spell_name = "[Echec] - insufficient mana points"
@@ -95,6 +106,17 @@ class EliteCard(Card, Combatable, Magical):
         return result
 
     def play(self, game_state: dict) -> dict:
+        if not isinstance(game_state, dict):
+            raise TypeError(f"play: {game_state} is not dict")
+        good_key = [
+            'target',
+            'incoming_damage',
+            'spell_name',
+            'targets'
+        ]
+        for key in good_key:
+            if key not in game_state:
+                raise KeyError(f"play: {key} wrong keys")
         result = {
             'attack': self.attack(game_state['target']),
             'defense': self.defend(game_state['incoming_damage']),
