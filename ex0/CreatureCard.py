@@ -1,22 +1,21 @@
-#!/usr/bin/env python3
-
 # ************************************************************************* #
 #                                                                           #
 #                                                      :::      ::::::::    #
 #  CreatureCard.py                                   :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
+#  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/20 13:12:10 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/30 19:14:28 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/31 09:02:38 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
 from ex0.Card import Card
+from ex0.Card import Rarity
 
 
 class CreatureCard(Card):
-    def __init__(self, name: str, cost: int, rarity: str, type: str,
+    def __init__(self, name: str, cost: int, rarity: Rarity, type: str,
                  attack: int, health: int) -> None:
 
         if not isinstance(attack, int) or attack <= 0:
@@ -49,9 +48,14 @@ class CreatureCard(Card):
         return game_state
 
     def attack_target(self, target: str) -> dict:
-        return {
+        if target is None:
+            raise ValueError(f"target is {target}")
+        elif not isinstance(target, str) or target == "":
+            raise ValueError(f"target is not string: {target}")
+        result = {
             'attacker': self.name,
             'target': target,
             'damage_dealt': self.attack,
             'combat_resolved': True
             }
+        return result

@@ -5,10 +5,10 @@
 #                                                      :::      ::::::::    #
 #  Deck.py                                           :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
+#  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/23 14:00:55 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/30 19:29:18 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/31 09:57:01 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -24,9 +24,13 @@ class Deck():
         self.lst_deck: list[Card] = []
 
     def add_card(self, card: Card) -> None:
+        if not isinstance(card, Card):
+            raise TypeError("add_card typing error")
         self.lst_deck.append(card)
 
     def remove_card(self, card_name: str) -> bool:
+        if not isinstance(card_name, str) or card_name == "":
+            raise ValueError("remove_card error")
         for item in self.lst_deck:
             if item.name == card_name:
                 self.lst_deck.remove(item)

@@ -8,11 +8,12 @@
 #  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/20 13:12:47 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/23 14:09:00 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/31 08:41:02 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
 from ex0.CreatureCard import CreatureCard
+from ex0.Card import Rarity
 
 
 def main() -> None:
@@ -20,10 +21,12 @@ def main() -> None:
     print("\nTesting Abstract Base Class Design:")
     print("\nCreatureCard Info:")
     try:
-        goblin = CreatureCard('Goblin Warrior', 7, 'Common', 'Creature', 3, 3)
-        dragon = CreatureCard('Fire Dragon', 5, 'Legendary', 'Creature', 7, 5)
+        goblin = CreatureCard('Goblin Warrior', 7, Rarity.COMMON,
+                              'Creature', 3, 3)
+        dragon = CreatureCard('Fire Dragon', 5, Rarity.LEGENDARY,
+                              'Creature', 7, 5)
     except (AttributeError, ValueError) as e:
-        print(f"[KO] Fire Dragon: {e}")
+        print(f"[ERROR] CreateCard: {e}")
         return
 
     print(dragon.get_card_info())
@@ -41,7 +44,10 @@ def main() -> None:
         return
 
     print(f"\n{dragon.name} attacks {goblin.name}:")
-    print(f"Attack result: {dragon.attack_target(goblin.name)}")
+    try:
+        print(f"Attack result: {dragon.attack_target(goblin.name)}")
+    except ValueError as e:
+        print(f"[ERROR] attack_target: {e}")
 
     print("\nTesting insufficient mana (3 available):")
     try:
