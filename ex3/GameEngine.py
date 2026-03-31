@@ -3,10 +3,10 @@
 #                                                      :::      ::::::::    #
 #  GameEngine.py                                     :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
+#  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/25 14:54:07 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/30 19:52:22 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/31 11:53:31 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -17,6 +17,10 @@ from ex3.GameStrategy import GameStrategy
 class GameEngine():
     def configure_engine(self, factory: CardFactory,
                          strategy: GameStrategy) -> None:
+        if not isinstance(factory, CardFactory):
+            raise TypeError(f"configure_engine: factory invalid: {factory}")
+        if not isinstance(strategy, GameStrategy):
+            raise TypeError(f"configure_engine: strategy invalid: {strategy}")
         self.factory = factory
         self.strategy = strategy
         self.turn = 0

@@ -3,14 +3,15 @@
 #                                                      :::      ::::::::    #
 #  FantasyCardFactory.py                             :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
+#  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/25 14:53:45 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/30 19:47:06 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/31 11:49:30 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
 from ex0.Card import Card
+from ex0.Card import Rarity
 from ex1.SpellCard import SpellCard
 from ex1.ArtifactCard import ArtifactCard
 from ex0.CreatureCard import CreatureCard
@@ -25,7 +26,9 @@ class FantasyCardFactory(CardFactory):
             return CreatureCard(
                 name_or_power,
                 randint(1, 10),
-                choice(['Common', 'Rare', 'Legendary']),
+                choice([Rarity.COMMON,
+                        Rarity.RARE,
+                        Rarity.LEGENDARY]),
                 'Creature',
                 randint(1, 10),
                 randint(1, 10)
@@ -41,7 +44,9 @@ class FantasyCardFactory(CardFactory):
                         "Healing Angel",
                         "Forest Sprite"]),
                 name_or_power,
-                choice(['Common', 'Rare', 'Legendary']),
+                choice([Rarity.COMMON,
+                        Rarity.RARE,
+                        Rarity.LEGENDARY]),
                 'Creature',
                 randint(1, 10),
                 randint(1, 10)
@@ -57,7 +62,9 @@ class FantasyCardFactory(CardFactory):
                         "Healing Angel",
                         "Forest Sprite"]),
                 randint(1, 10),
-                choice(['Common', 'Rare', 'Legendary']),
+                choice([Rarity.COMMON,
+                        Rarity.RARE,
+                        Rarity.LEGENDARY]),
                 'Creature',
                 randint(1, 10),
                 randint(1, 10)
@@ -68,7 +75,9 @@ class FantasyCardFactory(CardFactory):
             return SpellCard(
                 name_or_power,
                 randint(1, 10),
-                choice(['Common', 'Rare', 'Legendary']),
+                choice([Rarity.COMMON,
+                        Rarity.RARE,
+                        Rarity.LEGENDARY]),
                 'Spell',
                 choice(["damage", "heal"])
                 )
@@ -83,7 +92,9 @@ class FantasyCardFactory(CardFactory):
                         "Divine Light",
                         "Magic Missile"]),
                 name_or_power,
-                choice(['Common', 'Rare', 'Legendary']),
+                choice([Rarity.COMMON,
+                        Rarity.RARE,
+                        Rarity.LEGENDARY]),
                 'Spell',
                 choice(["damage", "heal"])
                 )
@@ -98,7 +109,9 @@ class FantasyCardFactory(CardFactory):
                         "Divine Light",
                         "Magic Missile"]),
                 randint(1, 10),
-                choice(['Common', 'Rare', 'Legendary']),
+                choice([Rarity.COMMON,
+                        Rarity.RARE,
+                        Rarity.LEGENDARY]),
                 'Spell',
                 choice(["damage", "heal"])
                 )
@@ -109,7 +122,9 @@ class FantasyCardFactory(CardFactory):
             return ArtifactCard(
                 name_or_power,
                 randint(1, 10),
-                choice(['Common', 'Rare', 'Legendary']),
+                choice([Rarity.COMMON,
+                        Rarity.RARE,
+                        Rarity.LEGENDARY]),
                 'Artifact',
                 randint(1, 3),
                 choice([
@@ -133,7 +148,9 @@ class FantasyCardFactory(CardFactory):
                         "Cloak of Shadows",
                         "Staff of Elements"]),
                 name_or_power,
-                choice(['Common', 'Rare', 'Legendary']),
+                choice([Rarity.COMMON,
+                        Rarity.RARE,
+                        Rarity.LEGENDARY]),
                 'Artifact',
                 randint(1, 3),
                 choice([
@@ -157,7 +174,9 @@ class FantasyCardFactory(CardFactory):
                         "Cloak of Shadows",
                         "Staff of Elements"]),
                 randint(1, 10),
-                choice(['Common', 'Rare', 'Legendary']),
+                choice([Rarity.COMMON,
+                        Rarity.RARE,
+                        Rarity.LEGENDARY]),
                 'Artifact',
                 randint(1, 3),
                 choice([
